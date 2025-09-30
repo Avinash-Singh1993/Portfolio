@@ -31,7 +31,7 @@ const Home = () => {
 function App() {
   return (
     <div className="App">
-      <HashRouter basename="/Portfolio">
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
