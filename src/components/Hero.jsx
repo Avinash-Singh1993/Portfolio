@@ -1,85 +1,129 @@
+// Hero - patched (drop-in replacement)
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Download, ChevronDown } from 'lucide-react';
 import portfolioData from '../mockData';
 
 const Hero = () => {
-    const heroRef = useRef(null);
-    const textRef = useRef(null);
-    const imageRef = useRef(null);
     const particlesRef = useRef(null);
 
     useEffect(() => {
-        const tl = gsap.timeline();
+        let resizeHandler;
 
-        // Create floating particles animation
-        gsap.set('.particle', {
-            x: () => Math.random() * window.innerWidth,
-            y: () => Math.random() * window.innerHeight,
-            opacity: () => Math.random() * 0.5 + 0.1,
-        });
+        // gsap.context scopes selectors to avoid affecting other components/pages.
+        const ctx = gsap.context(() => {
+            const container = particlesRef.current;
+            if (!container) return;
 
-        gsap.to('.particle', {
-            y: '-=100',
-            duration: () => Math.random() * 3 + 2,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut',
-            stagger: {
-                amount: 2,
-                from: 'random'
+            const particles = container.querySelectorAll('.particle');
+
+            // Set will-change and pointer-events for performance & no interaction
+            particles.forEach(p => {
+                p.style.willChange = 'transform, opacity';
+                p.style.pointerEvents = 'none';
+            });
+
+            // initialize positions inside container bounds
+            function initParticles() {
+                const rect = container.getBoundingClientRect();
+                particles.forEach((p) => {
+                    // use rect.width / rect.height to keep them inside the hero area
+                    const x = Math.random() * rect.width;
+                    const y = Math.random() * rect.height;
+                    gsap.set(p, {
+                        x,
+                        y,
+                        opacity: Math.random() * 0.5 + 0.1,
+                    });
+                });
             }
-        });
 
-        // Main hero animation
-        tl.fromTo('.hero-title',
-            { y: 100, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }
-        )
-            .fromTo('.hero-subtitle',
-                { y: 50, opacity: 0 },
-                { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
-                '-=0.8'
+            // create (or recreate) particle float animation
+            function startParticleAnimation() {
+                // kill previous tweens of these nodes first
+                gsap.killTweensOf(particles);
+
+                gsap.to(particles, {
+                    // relative up/down float - keep movement small so they stay within container area
+                    y: '+=-40',
+                    duration: () => Math.random() * 3 + 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'power1.inOut',
+                    stagger: {
+                        amount: 2,
+                        from: 'random',
+                    },
+                });
+            }
+
+            initParticles();
+            startParticleAnimation();
+
+            // Recalculate on resize so no particle sits outside container
+            resizeHandler = () => {
+                initParticles();
+                startParticleAnimation();
+            };
+            window.addEventListener('resize', resizeHandler);
+
+            // --- Hero entrance & other animations (scoped to this component) ---
+            const tl = gsap.timeline();
+            tl.fromTo('.hero-title',
+                { y: 100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }
             )
-            .fromTo('.hero-description',
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-                '-=0.6'
-            )
-            .fromTo('.hero-buttons',
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-                '-=0.4'
-            )
-            .fromTo('.hero-image',
-                { scale: 0.8, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out' },
-                '-=1'
+                .fromTo('.hero-subtitle',
+                    { y: 50, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+                    '-=0.8'
+                )
+                .fromTo('.hero-description',
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+                    '-=0.6'
+                )
+                .fromTo('.hero-buttons',
+                    { y: 30, opacity: 0 },
+                    { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+                    '-=0.4'
+                )
+                .fromTo('.hero-image',
+                    { scale: 0.8, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 1.2, ease: 'power3.out' },
+                    '-=1'
+                );
+
+            // Floating hero image
+            gsap.to('.hero-image', {
+                y: -20,
+                duration: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
+
+            // Scroll indicator
+            gsap.fromTo('.scroll-indicator',
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 2 }
             );
 
-        // Continuous floating animation for hero image
-        gsap.to('.hero-image', {
-            y: -20,
-            duration: 3,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut'
-        });
+            gsap.to('.scroll-indicator', {
+                y: 10,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+            });
 
-        // Scroll indicator animation
-        gsap.fromTo('.scroll-indicator',
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 2 }
-        );
+        }, particlesRef); // scope to node
 
-        gsap.to('.scroll-indicator', {
-            y: 10,
-            duration: 1.5,
-            repeat: -1,
-            yoyo: true,
-            ease: 'power1.inOut'
-        });
-
+        // cleanup on unmount
+        return () => {
+            ctx.revert(); // kills all tweens created inside the context
+            if (resizeHandler) window.removeEventListener('resize', resizeHandler);
+        };
     }, []);
 
     const scrollToAbout = () => {
@@ -91,8 +135,8 @@ const Hero = () => {
 
     return (
         <section id="hero" className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
-            {/* Animated background particles */}
-            <div className="absolute inset-0" ref={particlesRef}>
+            {/* Animated background particles - note extra class 'particles-container' */}
+            <div className="absolute inset-0 particles-container" ref={particlesRef}>
                 {[...Array(200)].map((_, i) => (
                     <div
                         key={i}
