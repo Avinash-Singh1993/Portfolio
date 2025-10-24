@@ -144,7 +144,7 @@ const Testimonials = () => {
 
                 {/* All testimonials grid */}
                 <div className="grid md:grid-cols-3 gap-8">
-                    {portfolioData.testimonials.map((testimonial, index) => (
+                    {portfolioData.testimonials.map((testimonial) => (
                         <div
                             key={testimonial.id}
                             className="testimonial-card bg-gray-700/30 backdrop-blur-sm rounded-xl p-6 border border-gray-600 hover:border-emerald-400/50 transition-all duration-300 transform hover:scale-105"
