@@ -124,44 +124,61 @@ const Header = () => {
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="mobile-menu fixed inset-0 top-[64px] z-40 bg-gray-900/95 backdrop-blur-md md:hidden px-6 py-10 flex flex-col items-center space-y-8">
-                    {navItems.map((item) => (
-                        <button
-                            key={item.id}
-                            onClick={() => scrollToSection(item.id)}
-                            className="text-white text-xl font-medium hover:text-emerald-400 transition-colors duration-200"
-                        >
-                            {item.name}
-                        </button>
-                    ))}
+                <div className="mobile-menu fixed inset-0 top-[64px] z-40 bg-transparent backdrop-blur-md md:hidden">
+                    {/* content wrapper uses 2 rows: main grid + footer socials */}
+                    <div className="mx-auto max-w-sm h-full px-6 py-8 grid grid-rows-[1fr_auto] gap-6 overflow-y-auto overscroll-contain relative">
 
-                    {/* Mobile Social Links */}
-                    <div className="flex space-x-6 pt-6">
-                        <a
-                            href={portfolioData.personal.social.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
-                        >
-                            <Github size={24} />
-                        </a>
-                        <a
-                            href={portfolioData.personal.social.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
-                        >
-                            <Linkedin size={24} />
-                        </a>
-                        <a
-                            href={`mailto:${portfolioData.personal.email}`}
-                            className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
-                        >
-                            <Mail size={24} />
-                        </a>
+                        {/* NAV GRID */}
+                        <nav className="grid grid-cols-3 gap-1 justify-items-stretch content-start absolute z-50">
+                            {navItems.map((item) => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => {
+                                        scrollToSection(item.id);
+                                        setIsMenuOpen(false); // close after tap
+                                    }}
+                                    className="
+                w-full rounded-xl border border-white/10 bg-white/5
+                px-2 py-1 text-[0.8rem] font-medium text-white text-center leading-tight
+                hover:border-emerald-400/40 hover:text-emerald-400
+                focus:outline-none focus:ring-2 focus:ring-emerald-400/30
+                transition active:scale-[.985]
+            "
+                                >
+                                    <span className="break-words whitespace-normal">{item.name}</span>
+                                </button>
+                            ))}
+                        </nav>
+
+                        {/* SOCIALS (footer) */}
+                        <div className="flex items-center justify-center gap-6 pb-[env(safe-area-inset-bottom)] absolute -bottom-[38px] right-8">
+                            <a
+                                href={portfolioData.personal.social.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                            >
+                                <Github size={24} />
+                            </a>
+                            <a
+                                href={portfolioData.personal.social.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                            >
+                                <Linkedin size={24} />
+                            </a>
+                            <a
+                                href={`mailto:${portfolioData.personal.email}`}
+                                className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                            >
+                                <Mail size={24} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             )}
+
 
         </header>
     );

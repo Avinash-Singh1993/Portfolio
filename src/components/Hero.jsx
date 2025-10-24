@@ -155,7 +155,7 @@ const Hero = () => {
                         {/* Left Content */}
                         <div className="text-left">
                             <div className="hero-title">
-                                <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+                                <h1 className="text-5xl md:text-7xl font-bold text-purple-800 mb-4">
                                     <span className="block">I'm</span>
                                     <span className="text-emerald-400 block">
                                         {portfolioData.personal.name.split(' ')[0]}
