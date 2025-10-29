@@ -2,25 +2,38 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 import portfolioData from '../mockData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
     const contactRef = useRef(null);
+
+    // Controlled inputs (kept as-is)
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         subject: '',
         message: ''
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Formspree hook
+    const [fsState, handleFormspree] = useForm('myzbedzw');
+
+    // Clear inputs when successfully sent
+    useEffect(() => {
+        if (fsState.succeeded) {
+            setFormData({ name: '', email: '', subject: '', message: '' });
+        }
+    }, [fsState.succeeded]);
 
     useEffect(() => {
         const contactSection = contactRef.current;
 
         // Animate section title
-        gsap.fromTo('.contact-title',
+        gsap.fromTo(
+            '.contact-title',
             { y: 50, opacity: 0 },
             {
                 y: 0,
@@ -37,7 +50,8 @@ const Contact = () => {
         );
 
         // Animate contact info cards
-        gsap.fromTo('.contact-info-card',
+        gsap.fromTo(
+            '.contact-info-card',
             { y: 40, opacity: 0, scale: 0.95 },
             {
                 y: 0,
@@ -56,7 +70,8 @@ const Contact = () => {
         );
 
         // Animate form
-        gsap.fromTo('.contact-form',
+        gsap.fromTo(
+            '.contact-form',
             { x: 50, opacity: 0 },
             {
                 x: 0,
@@ -73,7 +88,8 @@ const Contact = () => {
         );
 
         // Animate form fields
-        gsap.fromTo('.form-field',
+        gsap.fromTo(
+            '.form-field',
             { y: 30, opacity: 0 },
             {
                 y: 0,
@@ -89,56 +105,32 @@ const Contact = () => {
                 }
             }
         );
-
     }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
             [name]: value
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
-        // Simulate form submission (replace with actual API call)
-        try {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            alert("Message Sent! Thank you for your message. I'll get back to you soon!");
-
-            setFormData({
-                name: '',
-                email: '',
-                subject: '',
-                message: ''
-            });
-        } catch (e) {
-            alert(`Error: Something went wrong. Please try again. ${e.message}`);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
     const contactInfo = [
         {
             icon: <Mail className="w-6 h-6" />,
-            title: "Email",
+            title: 'Email',
             value: portfolioData.personal.email,
             link: `mailto:${portfolioData.personal.email}`
         },
         {
             icon: <Phone className="w-6 h-6" />,
-            title: "Phone",
+            title: 'Phone',
             value: portfolioData.personal.phone,
             link: `tel:${portfolioData.personal.phone}`
         },
         {
             icon: <MapPin className="w-6 h-6" />,
-            title: "Location",
+            title: 'Location',
             value: portfolioData.personal.location,
             link: null
         }
@@ -147,17 +139,17 @@ const Contact = () => {
     const socialLinks = [
         {
             icon: <Github className="w-6 h-6" />,
-            name: "GitHub",
+            name: 'GitHub',
             url: portfolioData.personal.social.github
         },
         {
             icon: <Linkedin className="w-6 h-6" />,
-            name: "LinkedIn",
+            name: 'LinkedIn',
             url: portfolioData.personal.social.linkedin
         },
         {
             icon: <Twitter className="w-6 h-6" />,
-            name: "Twitter",
+            name: 'Twitter',
             url: portfolioData.personal.social.twitter
         }
     ];
@@ -193,14 +185,10 @@ const Contact = () => {
                                 >
                                     <div className="flex items-center gap-4">
                                         <div className="bg-emerald-500/20 p-3 rounded-lg border border-emerald-400/30">
-                                            <div className="text-emerald-400">
-                                                {info.icon}
-                                            </div>
+                                            <div className="text-emerald-400">{info.icon}</div>
                                         </div>
                                         <div>
-                                            <div className="text-white font-semibold mb-1">
-                                                {info.title}
-                                            </div>
+                                            <div className="text-white font-semibold mb-1">{info.title}</div>
                                             {info.link ? (
                                                 <a
                                                     href={info.link}
@@ -242,7 +230,12 @@ const Contact = () => {
                     <div className="contact-form">
                         <h3 className="text-2xl font-bold text-white mb-8">Send Message</h3>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Formspree form */}
+                        <form onSubmit={handleFormspree} className="space-y-6">
+                            {/* Honeypot + optional static subject for email header */}
+                            <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+                            <input type="hidden" name="_subject" value={`Portfolio: ${formData.subject || 'New message from Avinash Portfolio'}`} />
+
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="form-field">
                                     <label htmlFor="name" className="block text-white font-medium mb-2">
@@ -258,6 +251,7 @@ const Contact = () => {
                                         className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all duration-300"
                                         placeholder="John Doe"
                                     />
+                                    <ValidationError prefix="Name" field="name" errors={fsState.errors} />
                                 </div>
 
                                 <div className="form-field">
@@ -274,6 +268,7 @@ const Contact = () => {
                                         className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all duration-300"
                                         placeholder="john@example.com"
                                     />
+                                    <ValidationError prefix="Email" field="email" errors={fsState.errors} />
                                 </div>
                             </div>
 
@@ -291,6 +286,7 @@ const Contact = () => {
                                     className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all duration-300"
                                     placeholder="Project Inquiry"
                                 />
+                                <ValidationError prefix="Subject" field="subject" errors={fsState.errors} />
                             </div>
 
                             <div className="form-field">
@@ -307,14 +303,19 @@ const Contact = () => {
                                     className="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all duration-300 resize-vertical"
                                     placeholder="Tell me about your project..."
                                 />
+                                <ValidationError prefix="Message" field="message" errors={fsState.errors} />
                             </div>
+
+                            {fsState.succeeded && (
+                                <p className="text-emerald-400 -mt-2">Message sent ✅ I’ll get back to you soon.</p>
+                            )}
 
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={fsState.submitting}
                                 className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-emerald-500/50 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:transform-none flex items-center justify-center gap-2"
                             >
-                                {isSubmitting ? (
+                                {fsState.submitting ? (
                                     <>
                                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                         Sending...

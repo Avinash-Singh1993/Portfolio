@@ -123,7 +123,7 @@ const Footer = () => {
 
                             <div className="flex items-center gap-4">
                                 <div className="text-gray-400 text-sm">
-                                    Built with React & GSAP
+                                    Built with <span className="text-sky-500">React</span> & <span className="text-emerald-400">GSAP</span>
                                 </div>
 
                                 <button
