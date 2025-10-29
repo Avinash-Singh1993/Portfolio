@@ -307,7 +307,7 @@ const Contact = () => {
                             </div>
 
                             {fsState.succeeded && (
-                                <p className="text-emerald-400 -mt-2">Message sent ✅ I’ll get back to you soon.</p>
+                                alert('Message sent ✅ I’ll get back to you soon.')
                             )}
 
                             <button
