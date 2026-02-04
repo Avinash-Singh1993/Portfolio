@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://github.com/Avinash-Singh1993/Portfolio/"
   },
   "dependencies": {
     "@formspree/react": "^3.0.0",

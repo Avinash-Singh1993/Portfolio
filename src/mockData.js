@@ -31,13 +31,12 @@ export const portfolioData = {
             { name: "HTML5", level: 92, category: "Frontend" },
             { name: "CSS3", level: 90, category: "Frontend" },
             { name: "JavaScript", level: 85, category: "Frontend" },
-
-        { name: "JavaScript", level: 85, category: "Frontend" },
             { name: "jQuery", level: 82, category: "Frontend" },
             { name: "Bootstrap", level: 82, category: "Frontend" },
             { name: "Tailwind CSS", level: 92, category: "Frontend" },
             { name: "React", level: 85, category: "Frontend" },
-            { name: "GSAP", level: 82, category: "Frontend" }
+            { name: "GSAP", level: 82, category: "Frontend" },
+            { name: "Framer Motion", level: 84, category: "Frontend" },
         ],
         backend: [
             { name: "Node.js", level: 86, category: "Backend" },
@@ -47,7 +46,6 @@ export const portfolioData = {
             { name: "SQL", level: 82, category: "Backend" },
             { name: "Python", level: 83, category: "Backend" },
             { name: "Django", level: 67, category: "Backend" },
-            { name: "Django", level: 74, category: "Backend" },
         ],
         tools: [
             { name: "Git / Github", level: 82, category: "Tools" },
@@ -202,11 +200,11 @@ export const portfolioData = {
             id: 1,
             company: "SMSGatewayHub",
             role: "Web Developer & Graphic Designer",
-            duration: "Mar 2025 - Present",
+            duration: "Mar 2025 - Sept 2025",
             location: "Mhow Naka Square, Indore (M.P.)",
             description:
                 "Building and designing scalable, intuitive web applications while aligning engineering and brand goals. Bridges code and design to ship fast, polished experiences.",
-            technologies: ["HTML5", "CSS3", "JavaScript", "GSAP", "Tailwind CSS", "Figma", "Photoshop", "Illustrator", "Canva"],
+            technologies: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS", "Figma", "Photoshop", "Illustrator", "Canva"],
             achievements: [
                 "Shipped reusable UI components and dashboards with performance and accessibility in mind",
                 "Standardized design patterns and handoff between dev and design",
