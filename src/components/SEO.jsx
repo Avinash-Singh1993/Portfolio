@@ -1,33 +1,44 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-
-import portfolioData from '../mockData';
+import { useEffect } from "react";
+import portfolioData from "../mockData";
 
 const SEO = ({ title, description, keywords, name, type }) => {
-    return (
-        <Helmet>
-            {/* Standard metadata tags */}
-            <title>{title}</title>
-            <meta name='description' content={description} />
-            <meta name='keywords' content={keywords} />
 
-            {/* End standard metadata tags */}
+    useEffect(() => {
+        // Title update
+        document.title = title;
 
-            {/* Facebook tags */}
-            <meta property="og:type" content={type} />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={description} />
-            {/* End Facebook tags */}
+        // Meta helper function
+        const setMeta = (attr, key, value) => {
+            let element = document.querySelector(`${attr}="${key}"`);
 
-            {/* Twitter tags */}
-            <meta name="twitter:creator" content={name} />
-            <meta name="twitter:card" content={type} />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={description} />
-            {/* End Twitter tags */}
-        </Helmet>
-    );
-}
+            if (!element) {
+                element = document.createElement("meta");
+                element.setAttribute(attr, key);
+                document.head.appendChild(element);
+            }
+
+            element.setAttribute("content", value);
+        };
+
+        // Standard meta
+        setMeta("name", "description", description);
+        setMeta("name", "keywords", keywords);
+
+        // Open Graph (Facebook)
+        setMeta("property", "og:type", type);
+        setMeta("property", "og:title", title);
+        setMeta("property", "og:description", description);
+
+        // Twitter
+        setMeta("name", "twitter:creator", name);
+        setMeta("name", "twitter:card", type);
+        setMeta("name", "twitter:title", title);
+        setMeta("name", "twitter:description", description);
+
+    }, [title, description, keywords, name, type]);
+
+    return null;
+};
 
 SEO.defaultProps = {
     title: portfolioData.seo.title,
