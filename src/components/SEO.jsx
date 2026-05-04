@@ -9,7 +9,7 @@ const SEO = ({ title, description, keywords, name, type }) => {
 
         // Meta helper function
         const setMeta = (attr, key, value) => {
-            let element = document.querySelector(`${attr}="${key}"`);
+            let element = document.querySelector(`meta[${attr}="${key}"]`);
 
             if (!element) {
                 element = document.createElement("meta");
