@@ -5,7 +5,7 @@ const SEO = ({ title, description, keywords, name, type }) => {
 
     useEffect(() => {
         // Title update
-        document.title = title;
+        document.title = title || "Avinash Singh | Full-Stack Web Developer";
 
         // Meta helper function
         const setMeta = (attr, key, value) => {
