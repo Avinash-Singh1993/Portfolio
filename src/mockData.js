@@ -287,7 +287,8 @@ export const portfolioData = {
     personal: {
         name: "Avinash Singh",
         title: "Full-Stack Web Developer",
-        tagline: "Building high-performance, user-focused web experiences with clean and scalable code",
+        tagline:
+            "Building high-performance, user-focused web experiences with clean and scalable code",
         bio: "Full-stack web developer with 5+ years of experience building scalable web applications. specializing in React, Node.js, and modern frontend development, with a strong focus on usability, performance, and clean execution.",
         email: "Avinash.Singh2020@yahoo.com",
         phone: "+91-8770880768",
@@ -297,8 +298,8 @@ export const portfolioData = {
             github: "https://github.com/Avinash-Singh1993",
             linkedin: "https://www.linkedin.com/in/avinash-singh-22a0b697/",
             twitter: "https://x.com/Avinash362263",
-            portfolio: ""
-        }
+            portfolio: "",
+        },
     },
 
     seo: {
@@ -308,7 +309,7 @@ export const portfolioData = {
         keywords:
             "Avinash Singh, Full-Stack Web Developer, React Developer, Node.js Developer, Frontend Developer, Backend Developer, Portfolio, UI Development, Web Applications",
         name: "Avinash Singh",
-        type: "website"
+        type: "website",
     },
 
     skills: {
@@ -321,7 +322,7 @@ export const portfolioData = {
             { name: "React", level: 78, category: "Frontend" },
             { name: "Next.js", level: 68, category: "Frontend" },
             { name: "GSAP", level: 70, category: "Frontend" },
-            { name: "Framer Motion", level: 64, category: "Frontend" }
+            { name: "Framer Motion", level: 70, category: "Frontend" },
         ],
         backend: [
             { name: "Node.js", level: 86, category: "Backend" },
@@ -339,8 +340,8 @@ export const portfolioData = {
             { name: "Canva", level: 90, category: "Tools" },
             { name: "Adobe Photoshop", level: 75, category: "Tools" },
             { name: "Adobe Illustrator", level: 70, category: "Tools" },
-            { name: "AWS EC2", level: 64, category: "Tools" }
-        ]
+            { name: "AWS EC2", level: 71, category: "Tools" },
+        ],
     },
 
     projects: [
@@ -354,20 +355,28 @@ export const portfolioData = {
             liveUrl: "https://avinash-singh1993.github.io/Portfolio/",
             githubUrl: "https://github.com/Avinash-Singh1993/Portfolio",
             featured: true,
-            category: "Frontend"
+            category: "Frontend",
         },
         {
             id: 2,
-            title: "Task Management App",
+            title: "AVINIQUE SERVER ",
             description:
-                "A collaborative task management application with real-time updates, drag-and-drop workflow, and team collaboration features.",
-            image:
-                "https://images.unsplash.com/photo-1663882658055-40f1d4249867?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwyfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHdvcmtzcGFjZXxlbnwwfHx8fDE3NTc1ODgxNjN8MA&ixlib=rb-4.1.0&q=85",
-            technologies: ["React", "TypeScript", "Socket.io", "Express.js", "PostgreSQL"],
-            liveUrl: null,
-            githubUrl: null,
-            featured: false,
-            category: "Full-Stack"
+                "A premium futuristic cloud infrastructure and AI-powered hosting platform featuring cinematic GSAP animations, immersive UI interactions, responsive glassmorphism design, smooth scrolling experience, and modern server-focused architecture built for high-performance digital experiences.",
+            image: "https://i.postimg.cc/x183fVzT/Portfolio-project-image-02.jpg",
+            technologies: [
+                "HTML5",
+                "CSS3",
+                "JavaScript",
+                "GSAP",
+                "ScrollTrigger",
+                "Lenis",
+                "SplitType",
+                "PHP",
+            ],
+            liveUrl: "https://avinique.xo.je",
+            githubUrl: "https://github.com/Avinash-Singh1993/AVINIQUE-SERVER-Futuristic-Cloud-Infrastructure-Platform",
+            featured: true,
+            category: "Frontend",
         },
         {
             id: 3,
@@ -380,7 +389,7 @@ export const portfolioData = {
             liveUrl: null,
             githubUrl: null,
             featured: false,
-            category: "Frontend"
+            category: "Frontend",
         },
         {
             id: 4,
@@ -393,7 +402,7 @@ export const portfolioData = {
             liveUrl: null,
             githubUrl: null,
             featured: false,
-            category: "Backend"
+            category: "Backend",
         },
         {
             id: 5,
@@ -406,8 +415,8 @@ export const portfolioData = {
             liveUrl: null,
             githubUrl: null,
             featured: false,
-            category: "Full-Stack"
-        }
+            category: "Full-Stack",
+        },
     ],
 
     services: [
@@ -422,9 +431,9 @@ export const portfolioData = {
                 "Performance Optimization",
                 "SEO Friendly",
                 "Cross-browser Compatibility",
-                "Accessibility (A11y)"
+                "Accessibility (A11y)",
             ],
-            price: "Starting from ₹4,000"
+            price: "Starting from ₹4,000",
         },
         {
             id: 2,
@@ -436,9 +445,9 @@ export const portfolioData = {
                 "RESTful APIs",
                 "Database Design",
                 "Authentication Systems",
-                "Cloud Integration"
+                "Cloud Integration",
             ],
-            price: "Starting from ₹6,000"
+            price: "Starting from ₹6,000",
         },
         {
             id: 3,
@@ -450,9 +459,9 @@ export const portfolioData = {
                 "End-to-end Development",
                 "Database Integration",
                 "Third-party APIs",
-                "Deployment & Hosting"
+                "Deployment & Hosting",
             ],
-            price: "Starting from ₹12,000"
+            price: "Starting from ₹12,000",
         },
         {
             id: 4,
@@ -460,9 +469,14 @@ export const portfolioData = {
             description:
                 "Providing design direction and user experience improvements to create intuitive and engaging digital products.",
             icon: "Palette",
-            features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-            price: "Starting from ₹2,500"
-        }
+            features: [
+                "User Research",
+                "Wireframing",
+                "Prototyping",
+                "Design Systems",
+            ],
+            price: "Starting from ₹2,500",
+        },
     ],
 
     testimonials: [
@@ -474,7 +488,7 @@ export const portfolioData = {
             content:
                 "Avinash brought a practical and structured approach to training. His real-world development knowledge, clean coding practices, and interactive teaching style helped students understand modern web development with clarity.",
             rating: 4.4,
-            image: "https://randomuser.me/api/portraits/women/1.jpg"
+            image: "https://randomuser.me/api/portraits/women/1.jpg",
         },
         {
             id: 2,
@@ -484,7 +498,7 @@ export const portfolioData = {
             content:
                 "Thanks to Avinash's proactive coordination and inventory tools, our store operations became smoother and more efficient. His Excel trackers and MIS reports saved hours of manual effort every week.",
             rating: 4.3,
-            image: "https://randomuser.me/api/portraits/men/48.jpg"
+            image: "https://randomuser.me/api/portraits/men/48.jpg",
         },
         {
             id: 3,
@@ -494,8 +508,8 @@ export const portfolioData = {
             content:
                 "Avinash consistently delivers polished, high-performance UI and clean code. His ability to bridge design and development has strengthened our digital brand presence significantly.",
             rating: 4.5,
-            image: "https://randomuser.me/api/portraits/women/15.jpg"
-        }
+            image: "https://randomuser.me/api/portraits/women/15.jpg",
+        },
     ],
 
     experience: [
@@ -515,13 +529,13 @@ export const portfolioData = {
                 "Figma",
                 "Canva",
                 "Adobe Photoshop",
-                "Adobe Illustrator"
+                "Adobe Illustrator",
             ],
             achievements: [
                 "Built reusable UI components and dashboards with performance and accessibility in mind",
                 "Improved design consistency by standardizing UI patterns and handoff workflows",
-                "Optimized key pages to improve loading speed and overall user experience"
-            ]
+                "Optimized key pages to improve loading speed and overall user experience",
+            ],
         },
         {
             id: 2,
@@ -546,13 +560,13 @@ export const portfolioData = {
                 "Express.js",
                 "React",
                 "Node.js",
-                "SQL"
+                "SQL",
             ],
             achievements: [
                 "Designed a structured, project-based curriculum with strong coding practices",
                 "Mentored learners to build and deploy complete applications end to end",
-                "Created example projects demonstrating scalable development patterns"
-            ]
+                "Created example projects demonstrating scalable development patterns",
+            ],
         },
         {
             id: 3,
@@ -562,12 +576,18 @@ export const portfolioData = {
             location: "High Court, Indore, Madhya Pradesh, India",
             description:
                 "Supported legal operations through case file preparation, documentation, scheduling, and basic research. Maintained organized records and assisted in managing hearing calendars and office workflows.",
-            technologies: ["MS Word", "MS Excel", "Scanning", "Printing", "e-Court Portals"],
+            technologies: [
+                "MS Word",
+                "MS Excel",
+                "Scanning",
+                "Printing",
+                "e-Court Portals",
+            ],
             achievements: [
                 "Standardized document templates and improved file tracking",
                 "Ensured timely submissions and well-organized case records",
-                "Coordinated with clients and chambers for smooth hearing management"
-            ]
+                "Coordinated with clients and chambers for smooth hearing management",
+            ],
         },
         {
             id: 4,
@@ -581,10 +601,10 @@ export const portfolioData = {
             achievements: [
                 "Improved documentation turnaround and data workflow efficiency",
                 "Built spreadsheet trackers for status monitoring and reconciliation",
-                "Supported audits with well-organized records and reports"
-            ]
-        }
-    ]
+                "Supported audits with well-organized records and reports",
+            ],
+        },
+    ],
 };
 
 export default portfolioData;
